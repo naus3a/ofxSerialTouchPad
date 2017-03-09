@@ -46,10 +46,12 @@ vector<ofSerialDeviceInfo> ofxSerialTouchPad::lookForArduino(){
 #elif defined(TARGET_ANDROID)
     cout << "ofxSerialTouchPad has no mobile support"<< endl;
     return candidates;
+#elif defined(TARGET_LINUX_ARM)
+    dn = "ttyACM";
 #endif
     vector<ofSerialDeviceInfo> dd = getAvailableDevices();
     for(int i=0;i<dd.size();i++){
-        if(ofStringTimesInString(dd[i].getDeviceName(), "tty.usbmodem")>0)
+        if(ofStringTimesInString(dd[i].getDeviceName(), dn)>0)
             canditates.push_back(dd[i]);
         
     }
